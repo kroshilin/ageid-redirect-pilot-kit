@@ -28,7 +28,7 @@ class AgeIdMiddleware implements MiddlewareInterface
     {
         $config = $this->ageIdService->getConfig();
 
-        if ($config->enabled && (!count($config->countries) || in_array($config->countries, $request->getAttribute($config->countryCodeAttributeName)))) {
+        if ($config->enabled && (!count($config->countries) || in_array($request->getAttribute($config->countryCodeAttributeName), $config->countries))) {
             $motherHost = $request->getUri()->getScheme() . '://' . $request->getUri()->getHost();
             $redirectToAgeIdUrl = $this->ageIdService->getRedirectUrlToAgeId(
                 $motherHost .
